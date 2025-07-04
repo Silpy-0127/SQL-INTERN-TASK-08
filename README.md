@@ -19,42 +19,31 @@ Checks if a product’s stock meets a given threshold.
 - If stock < threshold → `Low Stock`  
 - If no product → `Product not found`
 
+## Task Objective
+Learn to modularize SQL logic using stored procedures and functions with parameters and conditional logic.
+
+## Database
+Used `LocalMarketDB`, which includes:
+- Sellers, Customers, Categories
+- Products, Inventory, Orders
+- OrderItems, Payments
+
+## What I Did
+- Created 2 procedures:
+  - `CheckStockStatus(product_id)`
+  - `CheckStockWithThreshold(product_id, threshold)`
+- Created 2 functions:
+  - `CalculateTotalPrice(price, qty)`
+  - `SafeTotalPrice(price, qty)` with input validation
+
+## 🛠 Tools Used
+- PostgreSQL 14
+- pgAdmin 4
+
+##  How to Use
 ```sql
+CALL CheckStockStatus(1);
 CALL CheckStockWithThreshold(1, 20);
 
----
-
-## Function: 'SafeTotalPrice(unit_price, qty)'
-### Purpose:
-Safely calculates the total price.
-
-### Logic:
-Returns NULL for negative values
-
-Returns 0.00 if qty is zero
-
-Otherwise: unit_price * qty
-
-SELECT SafeTotalPrice(200.00, 2);   -- 400.00
-SELECT SafeTotalPrice(100.00, 0);   -- 0.00
-SELECT SafeTotalPrice(-50.00, 5);   -- NULL
----
-
-## Files
-File	Description
-task8_procedures.sql	SQL code for procedures & functions
-README.md	Task summary
-
- ## Tools
-1)PostgreSQL 14+
-
-2)pgAdmin 4
-
----
-
-##Run
-1)Open pgAdmin or PostgreSQL CLI
-
-2)Run task8_procedures.sql
-
-3)Use CALL and SELECT queries to test the logic
+SELECT CalculateTotalPrice(599.99, 3);
+SELECT SafeTotalPrice(100.00, 0);
